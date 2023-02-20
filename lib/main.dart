@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'models/env.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -37,10 +39,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> _incrementCounter() async {
     final response = await http.get(
-      Uri.parse("https://sandbox-merchant.revolut.com/api/1.0/orders"),
+      Uri.parse("${Env.revoSandboxURL}/orders"),
       headers: {
         HttpHeaders.authorizationHeader:
-            "Bearer sk_co9M6wEHFZhP4x2VBC_ttHsy2MNx6yLYADG7etQcqvkhc2McAurozNW-MHhI3Nlr",
+            "Bearer ${Env.revoSandboxAPIKey}",
       },
     );
 

@@ -42,3 +42,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# exclude all constants.env files from source control
+*.env
+
+# exclude built env file from version control
+env.g.dart
