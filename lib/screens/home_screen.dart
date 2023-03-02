@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Last transactions",
+                    "Recent transactions",
                     style: TextStyle(
                       color: Styles.whiteColor,
                       fontSize: 18,

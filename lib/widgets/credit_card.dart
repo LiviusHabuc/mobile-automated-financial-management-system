@@ -46,7 +46,7 @@ class CreditCard extends StatelessWidget {
                     "CARD NUMBER",
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.5),
-                      fontSize: 12,
+                      fontSize: 14,
                     ),
                   ),
                   const SizedBox(
@@ -56,7 +56,7 @@ class CreditCard extends StatelessWidget {
                     "**** **** **** 1234",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 15,
+                      fontSize: 17,
                     ),
                   ),
                 ],
@@ -77,14 +77,18 @@ class CreditCard extends StatelessWidget {
                   const Spacer(),
                   const Text(
                     "VALID",
-                    style: TextStyle(fontSize: 12),
+                    style: TextStyle(
+                      fontSize: 14,
+                    ),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
                   const Text(
                     "09/25",
-                    style: TextStyle(fontSize: 15),
+                    style: TextStyle(
+                      fontSize: 17,
+                    ),
                   ),
                 ],
               ),
