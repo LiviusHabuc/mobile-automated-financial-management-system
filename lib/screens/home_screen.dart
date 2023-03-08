@@ -13,7 +13,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Material(
       color: Styles.primaryColor,
       elevation: 0,

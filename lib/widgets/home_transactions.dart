@@ -52,7 +52,7 @@ class _HomeTransactionsState extends State<HomeTransactions> {
               builder: (ctx, transactionData, child) => ListView.builder(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
-                itemCount: transactionData.transactions.length,
+                itemCount: 4,
                 itemBuilder: (context, index) =>
                     TransactionItem(transactionData.transactions[index]),
               ),
