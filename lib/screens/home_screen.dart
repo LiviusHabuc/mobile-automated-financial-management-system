@@ -6,10 +6,14 @@ import '../widgets/credit_card.dart';
 import '../widgets/home_greeting.dart';
 
 class HomeScreen extends StatelessWidget {
+
   const HomeScreen({Key? key}) : super(key: key);
+
+  static const routeName = "/home";
 
   @override
   Widget build(BuildContext context) {
+
     return Material(
       color: Styles.primaryColor,
       elevation: 0,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import './screens/transactions_list_screen.dart';
+import './screens/tabs_screen.dart';
 import '../providers/transactions_provider.dart';
 import '../screens/home_screen.dart';
 
@@ -25,13 +27,10 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blue,
           ),
-          home: HomeScreen(),
+          home: TabsScreen(),
           routes: {
-            // ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-            // CartScreen.routeName: (ctx) => CartScreen(),
-            // OrdersScreen.routeName: (ctx) => OrdersScreen(),
-            // UserProductsScreen.routeName: (ctx) => UserProductsScreen(),
-            // EditProductScreen.routeName: (ctx) => EditProductScreen(),
+            HomeScreen.routeName: (ctx) => HomeScreen(),
+            TransactionsListScreen.routeName: (ctx) => TransactionsListScreen(),
           },
         ),
       ),

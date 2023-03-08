@@ -46,6 +46,8 @@ dev_dependencies:
   intl:
   provider:
   shared_preferences:
+  fl_chart:
+  flutter_iconly:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -87,14 +89,6 @@ flutter:
         - asset: assets/fonts/DMSans_Regular.ttf
         - asset: assets/fonts/DMSans_Medium.ttf
         - asset: assets/fonts/DMSans_Bold.ttf
-
-    - family: IconlyBold
-      fonts:
-        - asset: assets/fonts/Iconly_Bold.ttf
-
-    - family: IconlyBroken
-      fonts:
-        - asset: assets/fonts/Iconly_Light.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
