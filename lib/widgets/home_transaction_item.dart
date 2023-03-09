@@ -41,7 +41,8 @@ class _HomeTransactionItemState extends State<HomeTransactionItem> {
             Icons.arrow_forward,
             color: Color(0xFFFF736C),
             size: 20,
-          )),
+          ),
+      ),
       title: Text(
         widget.transaction.description,
         style: TextStyle(

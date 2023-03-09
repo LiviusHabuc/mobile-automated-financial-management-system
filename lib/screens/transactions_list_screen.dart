@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_automated_financial_management_system/screens/filter_transactions.dart';
+import 'package:mobile_automated_financial_management_system/widgets/transactions_list_item.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/transactions_provider.dart' show Transactions;
@@ -69,7 +70,7 @@ class _TransactionsListScreenState extends State<TransactionsListScreen> {
               builder: (ctx, transactionData, child) => ListView.builder(
                 itemCount: transactionData.transactions.length,
                 itemBuilder: (ctx, index) =>
-                    HomeTransactionItem(transactionData.transactions[index]),
+                    TransactionsListItem(transactionData.transactions[index]),
               ),
             );
           }

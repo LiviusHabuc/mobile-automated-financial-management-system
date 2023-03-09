@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../providers/transactions_provider.dart';
+import '../utils/styling.dart';
 
 class FilterTransactions extends StatefulWidget {
   final Transactions transactions;
@@ -32,7 +33,8 @@ class _FilterTransactionsState extends State<FilterTransactions> {
       toDateString = "${_selectedToDate!.toIso8601String()}Z";
     }
 
-    widget.transactions.getAllTransactionsFiltered(fromDateString, toDateString, _selectedSortingStrategy);
+    widget.transactions
+        .getAllTransactionsFiltered(fromDateString, toDateString, _selectedSortingStrategy);
 
     Navigator.of(context).pop();
   }
@@ -156,6 +158,9 @@ class _FilterTransactionsState extends State<FilterTransactions> {
               ),
               ElevatedButton(
                 onPressed: _submitData,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Styles.blueColor,
+                ),
                 child: const Text("Apply filters"),
               ),
             ],
