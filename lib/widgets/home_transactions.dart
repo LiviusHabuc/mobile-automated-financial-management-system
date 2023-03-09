@@ -16,7 +16,7 @@ class _HomeTransactionsState extends State<HomeTransactions> {
   Future? _transactionsFuture;
 
   Future _obtainTransactionsFuture() {
-    return Provider.of<Transactions>(context, listen: false).getAllTransactions();
+    return Provider.of<Transactions>(context, listen: false).getHomeTransactions();
   }
 
   @override
@@ -52,9 +52,9 @@ class _HomeTransactionsState extends State<HomeTransactions> {
               builder: (ctx, transactionData, child) => ListView.builder(
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
-                itemCount: 4,
-                itemBuilder: (context, index) =>
-                    TransactionItem(transactionData.transactions[index]),
+                itemCount: transactionData.transactions.length,
+                itemBuilder: (ctx, index) =>
+                    HomeTransactionItem(transactionData.transactions[index]),
               ),
             );
           }

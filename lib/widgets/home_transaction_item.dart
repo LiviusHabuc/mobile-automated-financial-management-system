@@ -4,16 +4,16 @@ import 'package:intl/intl.dart';
 import '../providers/transactions_provider.dart' as tr;
 import '../utils/styling.dart';
 
-class TransactionItem extends StatefulWidget {
+class HomeTransactionItem extends StatefulWidget {
   final tr.TransactionItem transaction;
 
-  TransactionItem(this.transaction);
+  HomeTransactionItem(this.transaction);
 
   @override
-  State<TransactionItem> createState() => _TransactionItemState();
+  State<HomeTransactionItem> createState() => _HomeTransactionItemState();
 }
 
-class _TransactionItemState extends State<TransactionItem> {
+class _HomeTransactionItemState extends State<HomeTransactionItem> {
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -50,7 +50,7 @@ class _TransactionItemState extends State<TransactionItem> {
         ),
       ),
       subtitle: Text(
-        DateFormat("HH:mm dd, MMM yyyy").format(widget.transaction.completedAt),
+        DateFormat("HH:mm, dd MMM yyyy").format(widget.transaction.completedAt),
         style: TextStyle(
           color: Styles.whiteColor.withOpacity(0.7),
         ),

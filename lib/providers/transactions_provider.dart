@@ -49,9 +49,9 @@ class Transactions with ChangeNotifier {
     return [..._transactions];
   }
 
-  Future<void> getAllTransactions() async {
+  Future<void> getHomeTransactions() async {
     final response = await http.get(
-      Uri.parse("${Env.revoSandboxURL}/orders?email=$userEmail"),
+      Uri.parse("${Env.revoSandboxURL}/orders?email=$userEmail&limit=4"),
       headers: {
         HttpHeaders.authorizationHeader: "Bearer ${Env.revoSandboxAPIKey}",
       },
@@ -80,6 +80,49 @@ class Transactions with ChangeNotifier {
     }
 
     _transactions = loadedTransactions.toList();
+    notifyListeners();
+  }
+
+  Future<void> getAllTransactionsFilteredByDate(String from, String to) async {
+    String url = "${Env.revoSandboxURL}/orders?email=$userEmail";
+
+    if (from != "") {
+      url = "$url&from_created_date=$from";
+    }
+    if (to != "") {
+      url = "$url&to_created_date=$to";
+    }
+
+    final response = await http.get(
+      Uri.parse(url),
+      headers: {
+        HttpHeaders.authorizationHeader: "Bearer ${Env.revoSandboxAPIKey}",
+      },
+    );
+
+    if (json.decode(response.body) == null) {
+      return;
+    }
+
+    final extractedData = json.decode(response.body) as List<dynamic>;
+    final List<TransactionItem> loadedFilteredTransactions = [];
+
+    for (var transaction in extractedData) {
+      if (transaction["type"] == "PAYMENT" && transaction["state"] == "COMPLETED") {
+        loadedFilteredTransactions.add(TransactionItem(
+            id: transaction["id"],
+            type: transaction["type"],
+            state: transaction["state"],
+            createdAt: DateTime.parse(transaction["created_at"]),
+            completedAt: DateTime.parse(transaction["completed_at"]),
+            description: transaction["description"],
+            customerEmail: transaction["email"],
+            value: transaction["order_amount"]["value"] / 100,
+            currency: transaction["order_amount"]["currency"]));
+      }
+    }
+
+    _transactions = loadedFilteredTransactions.toList();
     notifyListeners();
   }
 }
