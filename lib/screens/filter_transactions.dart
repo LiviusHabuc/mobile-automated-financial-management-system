@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../providers/transactions_provider.dart';
-import 'package:provider/provider.dart';
 
 class FilterTransactions extends StatefulWidget {
+  final Transactions transactions;
+
+  FilterTransactions(this.transactions);
 
   @override
   _FilterTransactionsState createState() => _FilterTransactionsState();
@@ -30,7 +32,7 @@ class _FilterTransactionsState extends State<FilterTransactions> {
       toDateString = "${_selectedToDate!.toIso8601String()}Z";
     }
 
-    Provider.of<Transactions>(context, listen: false).getAllTransactionsFiltered(fromDateString, toDateString, _selectedSortingStrategy);
+    widget.transactions.getAllTransactionsFiltered(fromDateString, toDateString, _selectedSortingStrategy);
 
     Navigator.of(context).pop();
   }

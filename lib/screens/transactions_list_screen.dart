@@ -16,11 +16,11 @@ class TransactionsListScreen extends StatefulWidget {
 }
 
 class _TransactionsListScreenState extends State<TransactionsListScreen> {
-  void _startFilteringTransactions(ctx) {
+  void _startFilteringTransactions(ctx, transactions) {
     showModalBottomSheet(
       context: ctx,
       builder: (_) {
-        return FilterTransactions();
+        return FilterTransactions(transactions);
       },
     );
   }
@@ -41,19 +41,11 @@ class _TransactionsListScreenState extends State<TransactionsListScreen> {
             icon: const Icon(Icons.filter_list),
             tooltip: "Filter and sort transactions",
             onPressed: () {
-              _startFilteringTransactions(context);
+              _startFilteringTransactions(context, transactions);
             },
           ),
         ],
       ),
-      floatingActionButton: transactions.filteredTransactions
-          ? FloatingActionButton(
-              onPressed: () {
-                transactions.getAllTransactionsFiltered("", "", "None");
-              },
-              child: const Icon(Icons.filter_list_off),
-            )
-          : null,
       backgroundColor: Styles.primaryColor,
       body: FutureBuilder(
         future: transactions.getAllTransactionsFiltered("", "", "None"),
