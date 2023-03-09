@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobile_automated_financial_management_system/widgets/transactions_list_item_details.dart';
@@ -54,12 +52,28 @@ class _TransactionsListItemState extends State<TransactionsListItem> {
               ),
               tileColor: Styles.primaryWithOpacityColor,
               textColor: Styles.whiteColor,
-              title: Text(widget.transaction.description),
+              title: Text(
+                widget.transaction.description,
+                style: TextStyle(
+                  color: Styles.whiteColor,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("-${widget.transaction.value.toStringAsFixed(2)}"),
-                  Text(DateFormat("HH:mm, dd MMM yyyy").format(widget.transaction.createdAt)),
+                  Text(
+                    "-${widget.transaction.value.toStringAsFixed(2)}",
+                    style: TextStyle(
+                      color: Styles.whiteColor.withOpacity(0.7),
+                    ),
+                  ),
+                  Text(
+                    DateFormat("HH:mm, dd MMM yyyy").format(widget.transaction.createdAt),
+                    style: TextStyle(
+                      color: Styles.whiteColor.withOpacity(0.7),
+                    ),
+                  ),
                 ],
               ),
               trailing: IconButton(
