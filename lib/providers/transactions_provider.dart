@@ -43,6 +43,8 @@ class Transactions with ChangeNotifier {
 
   final String? userEmail;
 
+  bool filteredTransactions = false;
+
   Transactions(this._transactions, this.userEmail);
 
   List<TransactionItem> get transactions {
@@ -83,7 +85,13 @@ class Transactions with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getAllTransactionsFilteredByDate(String from, String to) async {
+  Future<void> getAllTransactionsFiltered(String from, String to, String sort) async {
+    if (from == "" && to == "" && sort == "None") {
+      filteredTransactions = false;
+    } else {
+      filteredTransactions = true;
+    }
+
     String url = "${Env.revoSandboxURL}/orders?email=$userEmail";
 
     if (from != "") {
@@ -120,6 +128,12 @@ class Transactions with ChangeNotifier {
             value: transaction["order_amount"]["value"] / 100,
             currency: transaction["order_amount"]["currency"]));
       }
+    }
+
+    if (sort == "Ascending") {
+      loadedFilteredTransactions.sort((tr1, tr2) => tr1.value.compareTo(tr2.value));
+    } else if (sort == "Descending") {
+      loadedFilteredTransactions.sort((tr1, tr2) => tr2.value.compareTo(tr1.value));
     }
 
     _transactions = loadedFilteredTransactions.toList();

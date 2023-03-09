@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_automated_financial_management_system/screens/filter_transactions.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/transactions_provider.dart';
+import '../providers/transactions_provider.dart' show Transactions;
 import '../utils/styling.dart';
 import '../widgets/home_transaction_item.dart';
 
@@ -15,21 +16,19 @@ class TransactionsListScreen extends StatefulWidget {
 }
 
 class _TransactionsListScreenState extends State<TransactionsListScreen> {
-  Future? _transactionsFuture;
-
-  Future _obtainTransactionsFuture() {
-    return Provider.of<Transactions>(context, listen: false)
-        .getAllTransactionsFilteredByDate("", "");
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _transactionsFuture = _obtainTransactionsFuture();
+  void _startFilteringTransactions(ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (_) {
+        return FilterTransactions();
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final transactions = Provider.of<Transactions>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -40,17 +39,24 @@ class _TransactionsListScreenState extends State<TransactionsListScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.filter_list),
-            tooltip: 'Show Snackbar',
+            tooltip: "Filter and sort transactions",
             onPressed: () {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(const SnackBar(content: Text('This is a snackbar')));
+              _startFilteringTransactions(context);
             },
           ),
         ],
       ),
+      floatingActionButton: transactions.filteredTransactions
+          ? FloatingActionButton(
+              onPressed: () {
+                transactions.getAllTransactionsFiltered("", "", "None");
+              },
+              child: const Icon(Icons.filter_list_off),
+            )
+          : null,
       backgroundColor: Styles.primaryColor,
       body: FutureBuilder(
-        future: _transactionsFuture,
+        future: transactions.getAllTransactionsFiltered("", "", "None"),
         builder: (ctx, dataSnapshot) {
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
